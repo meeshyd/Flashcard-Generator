@@ -6,16 +6,14 @@ function ClozeCard (text,cloze){
     return new ClozeCard(text,cloze);
   	};
 
-	this.text = text;
-	this.cloze = cloze;
-	this.partial = this.text.replace(this.cloze,'...');
-
-	//if cloze not found in full text, log error message.
-	if (this.text.indexOf(this.cloze) === -1) {
-		console.log('Invalid Cloze Error: '+this.cloze+' '+'was not found in '+this.text);
+  	//if cloze not found in full text, log error message.
+	if (text.indexOf(cloze) === -1) {
+		console.log('Invalid Cloze Error: '+cloze+' '+'was not found in '+text);
 	};
-	//removing this.text from object. full text can only be displayed by calling fullText method.
-	delete this.text;
+
+	this.fullText = text;
+	this.cloze = cloze;
+	this.partial = this.fullText.replace(this.cloze,'...');
 };
 
 //this method will store flashcard into a flashcards.txt file
@@ -30,11 +28,5 @@ ClozeCard.prototype.saveFlashcard = function(){
 		};
 	});
 };
-
-//this method displays the full text
-ClozeCard.prototype.fullText = function(){
-	console.log(this.cloze + this.partial.replace('...',''))
-};
-
 
 module.exports = ClozeCard;
